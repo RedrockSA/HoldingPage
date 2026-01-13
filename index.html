@@ -17,30 +17,35 @@
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
-            height: 900px;
+            min-height: 100vh; /* full viewport height */
             display: flex;
             justify-content: center;
             align-items: center;
+            padding: 20px;
+            box-sizing: border-box;
         }
 
-        /* Three-panel table */
-        table {
-            border-collapse: collapse;
-            width: 70%;
+        /* Flex container for three panels */
+        .panels {
+            display: flex;
+            flex-wrap: wrap; /* allows stacking on small screens */
+            justify-content: center;
+            align-items: center;
+            width: 90%;
             max-width: 900px;
-            height: 250px;
+            text-align: center;
         }
 
-        td {
-            width: 33.33%;
-            text-align: center;
-            vertical-align: middle;
+        .panel {
+            flex: 1 1 250px; /* min width 250px, grow/shrink */
+            margin: 10px;
         }
 
         /* Logo panel */
         .logo img {
+            width: 100%;
             max-width: 298px;
-            max-height: 139px;
+            height: auto; /* maintain aspect ratio */
         }
 
         /* Text panel */
@@ -58,25 +63,43 @@
             padding: 15px 10px;
             font-size: 14px;
         }
+
+        /* Responsive tweaks for small screens */
+        @media (max-width: 768px) {
+            .message {
+                font-size: 18px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .panels {
+                flex-direction: column;
+            }
+
+            .message {
+                font-size: 16px;
+            }
+
+            .logo img {
+                max-width: 200px;
+            }
+        }
     </style>
 </head>
 <body>
 
     <div class="background">
-        <table>
-            <tr>
-                <td class="logo">
-                    <img src="RSA_white.png" alt="Company Logo">
-                </td>
-                <td class="message">
-                    <i><b>Building something new.<br>
-                    Check back soon.</i></b>
-                </td>
-                <td>
-                    <!-- Intentionally blank -->
-                </td>
-            </tr>
-        </table>
+        <div class="panels">
+            <div class="panel logo">
+                <img src="RSA_white.png" alt="Company Logo">
+            </div>
+            <div class="panel message">
+                <i><b>Building something new.<br>Check back soon.</b></i>
+            </div>
+            <div class="panel">
+                <!-- Intentionally blank -->
+            </div>
+        </div>
     </div>
 
     <footer>
